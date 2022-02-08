@@ -12,37 +12,21 @@ class Data_m extends CI_Model
         return $query;
     }
 
-    // public function add($post)
+    // public function edit($id)
     // {
     //     $params = [
-    //         'id_nama' => $post['id'],
-    //         'nama' => $post['nama'],
-    //         'tgl_masuk' => $post['tm'],
-    //         'tempat' => $post['tempat'],
-    //         'tgl_lahir' => $post['tl'],
-    //         'jk' => $post['jk'],
-    //         'alamat' => $post['alamat'],
-    //         'nohp' => $post['nohp'],
-    //         'email' => $post['email']
+    //         'user_id' => $this->input->post('user_id'),
+    //         'tgl_masuk' => $this->input->post('tgl_masuk'),
+    //         'tgl_lahir' => $this->input->post('tgl_lahir'),
+    //         'tempat_lahir' => $this->input->post('kota'),
+    //         'jenis_kelamin' => $this->input->post('jenis_kelamin'),
+    //         'alamat' => $this->input->post('alamat'),
+    //         'nohp' => $this->input->post('nohp'),
+    //         'email' => $this->input->post('email'),
     //     ];
-    //     $this->db->insert('data_k', $params);
+    //     $this->db->where('id_nama', $id);
+    //     $this->db->update('data_k', $params);
     // }
-
-    public function edit($id)
-    {
-        $params = [
-            'user_id' => $this->input->post('user_id'),
-            'tgl_masuk' => $this->input->post('tgl_masuk'),
-            'tgl_lahir' => $this->input->post('tgl_lahir'),
-            'tempat_lahir' => $this->input->post('kota'),
-            'jenis_kelamin' => $this->input->post('jenis_kelamin'),
-            'alamat' => $this->input->post('alamat'),
-            'nohp' => $this->input->post('nohp'),
-            'email' => $this->input->post('email'),
-        ];
-        $this->db->where('id_nama', $id);
-        $this->db->update('data_k', $params);
-    }
 
     public function del($id)
     {

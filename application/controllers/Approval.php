@@ -6,7 +6,7 @@ class Approval extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        // check_not_login();
+        check_not_login();
         $this->load->model(['approval_m', 'data_m', 'divisi_m', 'tunggu_m']);
         $this->load->library('form_validation');
     }
@@ -48,11 +48,6 @@ class Approval extends CI_Controller
                 'keterangan' => $this->input->post('keterangan'),
                 'status' => $this->session->userdata('level_id') == 1 ? 1 : 2
             ];
-            // if ($this->session->userdata('level_id') == 1) {
-            //     $data_cuti = ['status' => 1];
-            // } else {
-            //     $data_cuti = ['status' => 2];
-            // }
 
             $this->db->insert('pengajuan_cuti', $data_cuti);
             if ($this->db->affected_rows() > 0) {

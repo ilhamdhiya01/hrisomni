@@ -78,6 +78,7 @@
                         <div class="form-group ">
                             <label>Email</label>
                             <input type="text" name="email" value="" class="form-control">
+                            <small class="text-danger"><?= form_error('email'); ?></small>
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-success btn-flat">

@@ -7,6 +7,7 @@ class Profile extends CI_Controller
     {
         parent::__construct();
         $this->load->library('form_validation');
+        check_not_login();
     }
 
     public function index()
@@ -147,7 +148,8 @@ class Profile extends CI_Controller
 
         $this->load->library('upload', $config);
         if (!$this->upload->do_upload('gambar')) {
-            echo $this->upload->display_errors();
+            echo "<script>window.location='" . site_url('profile') . "';</script>";
+            // echo $this->upload->display_errors();
         } else {
             $new_img = $this->upload->data('file_name');
             $this->db->set('gambar', $new_img);

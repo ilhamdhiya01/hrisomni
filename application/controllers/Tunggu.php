@@ -6,7 +6,7 @@ class Tunggu extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        // check_not_login();
+        check_not_login();
         $this->load->model(['tunggu_m', 'data_m', 'divisi_m']);
         $this->load->library('form_validation');
     }
@@ -16,37 +16,6 @@ class Tunggu extends CI_Controller
         $data['data_cuti'] = $this->tunggu_m->get();
         $this->template->load('template', 'pengajuan/tunggu_data', $data);
     }
-
-    // public function add()
-    // {
-    //     $tunggu = new stdClass();
-    //     $tunggu->id_cuti = null;
-    //     $tunggu->no_cuti = null;
-
-    //     $query_data = $this->data_m->get();
-    //     $unit[null] = '- Pilih -';
-    //     foreach ($query_data->result() as $dk) {
-    //         $data[$dk->id_nama] = $dk->nama;
-    //     }
-
-    //     $query_divisi = $this->divisi_m->get();
-    //     $unit[null] = '- Pilih -';
-    //     foreach ($query_divisi->result() as $div) {
-    //         $divisi[$div->id_divisi] = $div->divisi;
-    //     }
-
-    //     $tunggu->keperluan = null;
-    //     $tunggu->lama = null;
-    //     $tunggu->ket_lama = null;
-    //     $tunggu->mulai = null;
-    //     $tunggu->sampai = null;
-
-    //     $data = array(
-    //         'page' => 'add',
-    //         'row' => $tunggu
-    //     );
-    //     $this->template->load('template', 'pengajuan/ajukan_form');
-    // }
 
     public function add()
     {
@@ -80,11 +49,6 @@ class Tunggu extends CI_Controller
                 'status' => $this->session->userdata('level_id') == 1 ? 1 : 2,
                 'created_at' => date('d-m-Y')
             ];
-            // if ($this->session->userdata('level_id') == 1) {
-            //     $data_cuti = ['status' => 1];
-            // } else {
-            //     $data_cuti = ['status' => 2];
-            // }
 
             $this->db->insert('pengajuan_cuti', $data_cuti);
             if ($this->db->affected_rows() > 0) {
@@ -138,21 +102,6 @@ class Tunggu extends CI_Controller
             echo "<script>window.location='" . site_url('tunggu') . "';</script>";
         }
     }
-
-    // public function process()
-    // {
-    //     $post = $this->input->post(null, TRUE);
-    //     if (isset($_POST['add'])) {
-    //         $this->tunggu_m->add($post);
-    //     } else if (isset($_POST['edit'])) {
-    //         $this->tunggu_m->edit($post);
-    //     }
-    //     if ($this->db->affected_rows() > 0) {
-    //         $this->session->set_flashdata('success', 'Data berhasil disimpan');
-    //     }
-    //     redirect('tunggu');
-    // }
-
 
     public function del($id)
     {

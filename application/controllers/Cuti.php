@@ -8,6 +8,7 @@ class Cuti extends CI_Controller
         parent::__construct();
         $this->load->model(['tunggu_m', 'data_m', 'divisi_m']);
         $this->load->library('form_validation');
+        check_not_login();
     }
 
     public function index()

@@ -24,13 +24,19 @@
     <form action="<?= base_url(); ?>profile/edit_img_profile/<?= $this->session->userdata('id_user'); ?>" method="post" enctype="multipart/form-data">
         <center>
             <img src="<?= base_url() ?>uploads/<?= $this->fungsi->user_login()->gambar ?>" width="150" class="img-circle user-image">
-            <input type="file" name="gambar" class="foto-profile">
+            <input type="file" id="gambar" name="gambar" class="foto-profile">
         </center>
         <button type="submit" class="btn btn-block btn-primary edit-foto">Edit Gambar</button>
     </form>
 </div>
 
 <script>
+    // if (document.getElementById("gambar").files.length == 0) {
+    //     $(".edit-foto").attr("disabled", "disabled");
+    // } else {
+    //     $(".edit-foto").removeAttr("disabled");
+    // }
+
     $(".back").click(function() {
         $.ajax({
             url: "<?= base_url() ?>profile/load_profile",

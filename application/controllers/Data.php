@@ -6,7 +6,7 @@ class Data extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        // check_not_login();
+        check_not_login();
         $this->load->model('data_m');
         $this->load->library('form_validation');
     }
@@ -66,8 +66,6 @@ class Data extends CI_Controller
 
     public function edit($id)
     {
-        // $query = $this->data_m->get($id);
-
         $data = array(
             'page' => 'add',
             'users' => $this->db->get('users')->result_array(),
@@ -104,19 +102,19 @@ class Data extends CI_Controller
         }
     }
 
-    public function process()
-    {
-        $post = $this->input->post(null, TRUE);
-        if (isset($_POST['add'])) {
-            $this->data_m->add($post);
-        } else if (isset($_POST['edit'])) {
-            $this->data_m->edit($post);
-        }
-        if ($this->db->affected_rows() > 0) {
-            echo "<script>alert('Data berhasil disimpan');</script>";
-        }
-        echo "<script>window.location='" . site_url('data') . "';</script>";
-    }
+    // public function process()
+    // {
+    //     $post = $this->input->post(null, TRUE);
+    //     if (isset($_POST['add'])) {
+    //         $this->data_m->add($post);
+    //     } else if (isset($_POST['edit'])) {
+    //         $this->data_m->edit($post);
+    //     }
+    //     if ($this->db->affected_rows() > 0) {
+    //         echo "<script>alert('Data berhasil disimpan');</script>";
+    //     }
+    //     echo "<script>window.location='" . site_url('data') . "';</script>";
+    // }
 
     public function del($id)
     {
