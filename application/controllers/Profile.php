@@ -43,6 +43,13 @@ class Profile extends CI_Controller
         }
     }
 
+    public function load_edit_data_diri()
+    {
+        if ($this->input->is_ajax_request()) {
+            echo json_encode($this->load->view('ajax/ajax-form-edit-data-diri'));
+        }
+    }
+
     public function ajax_edit_password_validation()
     {
         $username = $_POST['username'];
@@ -162,6 +169,77 @@ class Profile extends CI_Controller
                     </script>";
             }
             echo "<script>window.location='" . site_url('profile') . "';</script>";
+        }
+    }
+
+    public function get_data_user()
+    {
+        $user_id = $this->session->userdata('id_user');
+        $data_users = $this->db->get_where('users', ['id' => $user_id])->row_array();
+        if ($this->input->is_ajax_request()) {
+            $data = [
+                "nama_pegawai" => $data_users,
+                "divisi" => $this->db->get_where("divisi", ["id_divisi" => $data_users["divisi_id"]])->row_array(),
+                "data_karyawan" => $this->db->get_where("data_karyawan", ["user_id" => $user_id])->row_array()
+            ];
+            echo json_encode($data);
+        }
+    }
+
+    public function proses_edit_data_diri()
+    {
+        $nama_pegawai = $_POST['nama_pegawai'];
+        $tgl_masuk = $_POST['tgl_masuk'];
+        $tgl_lahir = $_POST['tgl_lahir'];
+        $tempat_lahir = $_POST['tempat_lahir'];
+        $jenis_kelamin = $_POST['jenis_kelamin'];
+        $alamat = $_POST['alamat'];
+        $nohp = $_POST['nohp'];
+        $email = $_POST['email'];
+
+        if ($this->input->is_ajax_request()) {
+            $this->form_validation->set_rules('nama_pegawai', 'Nama pegawai', 'required|trim');
+            $this->form_validation->set_rules('email', 'Email', 'trim|valid_email');
+
+            if ($this->form_validation->run() == false) {
+                $msg = [
+                    "error" => [
+                        "nama_pegawai" => form_error("nama_pegawai"),
+                        "email" => form_error("email")
+                    ]
+                ];
+            } else {
+                // edit nama
+                $this->db->set('nama_pegawai', $nama_pegawai);
+                $this->db->where('id', $this->session->userdata('id_user'));
+                $this->db->update('users');
+
+                // edit data_karyawan
+                // $data = [
+                //     "user_id" => $this->session->userdata('id_user'),
+                //     "tgl_masuk" => $tgl_masuk,
+                //     "tgl_lahir" => $tgl_lahir,
+                //     "tempat_lahir" => $tempat_lahir,
+                //     "jenis_kelamin" => $jenis_kelamin,
+                //     "alamat" => $alamat,
+                //     "nohp" => $nohp,
+                //     "email" => $email
+                // ];
+                $this->db->set('tgl_lahir', $tgl_lahir);
+                $this->db->set('tempat_lahir', $tempat_lahir);
+                $this->db->set('jenis_kelamin', $jenis_kelamin);
+                $this->db->set('alamat', $alamat);
+                $this->db->set('nohp', $nohp);
+                $this->db->set('email', $email);
+                $this->db->where('user_id', $this->session->userdata("id_user"));
+                $this->db->update("data_karyawan");
+
+                $msg = [
+                    "status" => 200,
+                    "message" => "Data diri berhasil di ubah"
+                ];
+            }
+            echo json_encode($msg);
         }
     }
 }

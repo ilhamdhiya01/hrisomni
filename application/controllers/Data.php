@@ -30,7 +30,7 @@ class Data extends CI_Controller
         $this->form_validation->set_rules('jenis_kelamin', 'Jenis kelamin', 'required|trim');
         $this->form_validation->set_rules('alamat', 'Alamat', 'required|trim');
         $this->form_validation->set_rules('nohp', 'No hp', 'required|trim');
-        $this->form_validation->set_rules('email', 'Email', 'trim|is_unique[data_karyawan.email]');
+        $this->form_validation->set_rules('email', 'Email', 'trim|is_unique[data_karyawan.email]|valid_email');
 
         if ($this->form_validation->run() == false) {
             $this->template->load('template', 'data/data_form', $data);
@@ -77,7 +77,7 @@ class Data extends CI_Controller
         $this->form_validation->set_rules('jenis_kelamin', 'Jenis kelamin', 'required|trim');
         $this->form_validation->set_rules('alamat', 'Alamat', 'required|trim');
         $this->form_validation->set_rules('nohp', 'No hp', 'required|trim');
-        $this->form_validation->set_rules('email', 'Email', 'trim');
+        $this->form_validation->set_rules('email', 'Email', 'trim|valid_email');
 
         if ($this->form_validation->run() == false) {
             $this->template->load('template', 'data/data_form_edit', $data);
