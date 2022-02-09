@@ -17,12 +17,12 @@
             <small class="text-danger nama_pegawai"></small>
         </div>
         <div class="form-group">
-            <label for="tgl_masuk">Tanggal Masuk<small class="text-danger">*</small></label>
-            <input type="text" name="tgl_masuk" readonly class="form-control" id="tgl_masuk" placeholder="">
-        </div>
-        <div class="form-group">
             <label for="divisi">Divisi<small class="text-danger">*</small></label>
             <input type="text" name="divisi" readonly class="form-control" id="divisi" placeholder="">
+        </div>
+        <div class="form-group">
+            <label for="tgl_masuk">Tanggal Masuk<small class="text-danger">*</small></label>
+            <input type="text" name="tgl_masuk" readonly class="form-control" id="tgl_masuk" placeholder="">
         </div>
         <div class="row">
             <div class="col-md-6">
@@ -85,13 +85,12 @@
         type: "get",
         dataType: "json",
         success: function(data) {
-            $("[name='nama_pegawai']").val(data.nama_pegawai.nama_pegawai);
+            $("[name='nama_pegawai']").val(data.data_users.nama_pegawai);
+            $("[name='divisi']").val(data.data_users.divisi_d);
             $("[name='tgl_masuk']").val(data.data_karyawan.tgl_masuk);
-            $("[name='divisi']").val(data.divisi.divisi_d);
             $("[name='tgl_lahir']").val(data.data_karyawan.tgl_lahir);
             $("[name='tempat_lahir']").val(data.data_karyawan.tempat_lahir);
-            data.data_karyawan.jenis_kelamin == "L" ? $("[name='jenis_kelamin']").attr("checked", "checked") : $("[name='jenis_kelamin']").removeAttr("checked");
-            data.data_karyawan.jenis_kelamin == "P" ? $("[name='jenis_kelamin']").attr("checked", "checked") : $("[name='jenis_kelamin']").removeAttr("checked");
+            $('input:radio[name=jenis_kelamin][value='+data.data_karyawan.jenis_kelamin+']')[0].checked = true;
             $("[name='alamat']").val(data.data_karyawan.alamat);
             $("[name='nohp']").val(data.data_karyawan.nohp);
             $("[name='email']").val(data.data_karyawan.email);
@@ -99,14 +98,14 @@
     });
 
     $("#data-diri").submit(function(e) {
-        const nama_pegawai = $("[name='nama_pegawai']").val();
-        const tgl_masuk = $("[name='tgl_masuk']").val();
-        const tgl_lahir = $("[name='tgl_lahir']").val();
-        const tempat_lahir = $("[name='tempat_lahir']").val();
-        const jenis_kelamin = $("input[name='jenis_kelamin']:checked").val();
-        const alamat = $("[name='alamat']").val();
-        const nohp = $("[name='nohp']").val();
-        const email = $("[name='email']").val();
+        let nama_pegawai = $("[name='nama_pegawai']").val();
+        let tgl_masuk = $("[name='tgl_masuk']").val();
+        let tgl_lahir = $("[name='tgl_lahir']").val();
+        let tempat_lahir = $("[name='tempat_lahir']").val();
+        let jenis_kelamin = $("input[name='jenis_kelamin']:checked").val();
+        let alamat = $("[name='alamat']").val();
+        let nohp = $("[name='nohp']").val();
+        let email = $("[name='email']").val();
 
         $.ajax({
             url: "<?= base_url(); ?>profile/proses_edit_data_diri",

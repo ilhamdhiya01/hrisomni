@@ -43,23 +43,7 @@
                             <input type="text" class="form-control" value="<?= $user_by_id['username']; ?>" readonly name="username" id="username" placeholder="Username">
                             <small class="text-danger"><?= form_error('username'); ?></small>
                         </div>
-                        <div style="display:none;" class="form-group">
-                            <label for="password">Password Sekarang
-                                <!-- <div class=""> -->
-                                <input class="form-check-input" style="position:relative; left:5px; top:2px;" type="checkbox" value="" id="ubah-password"> <small style="position:relative; left:5px;">Ubah Password</small>
-                                <!-- <small>
-                                        Ubah Password
-                                    </small>
-                                </div> -->
-                            </label>
-                            <input type="password" class="form-control" value="<?= $user_by_id['password']; ?>" name="password" id="password" readonly placeholder="Password">
-                            <small class="text-danger"><?= form_error('password'); ?></small>
-                        </div>
-                        <div style="display:none;" class="form-group">
-                            <label for="konfirmasi_password">Konfirmasi Password</label>
-                            <input type="password" class="form-control" value="<?= $user_by_id['password']; ?>" name="konfirmasi_password" id="konfirmasi_password" readonly placeholder="Konfirmasi Password">
-                            <small class="text-danger"><?= form_error('konfirmasi_password'); ?></small>
-                        </div>
+                        <input type="hidden" class="form-control" value="<?= $user_by_id['password']; ?>" name="password" id="password" placeholder="Password">
                         <div class="form-group">
                             <label for="divisi">Divisi</label>
                             <select class="form-control" name="divisi" id="divisi">

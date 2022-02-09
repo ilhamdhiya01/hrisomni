@@ -47,6 +47,7 @@ class User extends CI_Controller
                     'gambar' => 'default.png',
                     'username' => $this->input->post('username'),
                     'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
+                    // 'password' => $this->input->post('password'),
                     'divisi_id' => $this->input->post('divisi'),
                     'level_id' => $this->input->post('level')
                 ];
@@ -93,8 +94,6 @@ class User extends CI_Controller
 
         $this->form_validation->set_rules('nama_pegawai', 'Nama pegawai', 'required');
         $this->form_validation->set_rules('username', 'Username', 'required|trim');
-        $this->form_validation->set_rules('password', 'Password', 'required|trim|min_length[5]|matches[konfirmasi_password]');
-        $this->form_validation->set_rules('konfirmasi_password', 'Konfirmasi password', 'required|trim|min_length[5]|matches[password]');
 
         if ($this->form_validation->run() == false) {
             $this->template->load('template', 'user/user_form_edit', $data);
@@ -108,7 +107,7 @@ class User extends CI_Controller
                 $data_post = [
                     'nama_pegawai' => $this->input->post('nama_pegawai'),
                     'username' => $this->input->post('username'),
-                    'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
+                    'password' => $this->input->post('password'),
                     'divisi_id' => $this->input->post('divisi'),
                     'level_id' => $this->input->post('level')
                 ];
@@ -124,9 +123,9 @@ class User extends CI_Controller
                 $new_img = $this->upload->data('file_name');
                 $data_post = [
                     'nama_pegawai' => $this->input->post('nama_pegawai'),
-                    'gambar' => $new_img,
+                    'gambar' => 'default.png',
                     'username' => $this->input->post('username'),
-                    'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
+                    'password' => $this->input->post('password'),
                     'divisi_id' => $this->input->post('divisi'),
                     'level_id' => $this->input->post('level')
                 ];

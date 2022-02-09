@@ -175,11 +175,13 @@ class Profile extends CI_Controller
     public function get_data_user()
     {
         $user_id = $this->session->userdata('id_user');
-        $data_users = $this->db->get_where('users', ['id' => $user_id])->row_array();
+        $this->db->select('divisi_d,nama_pegawai');
+        $this->db->join('divisi', 'users.divisi_id = divisi.id_divisi');
+        $this->db->where('id', $user_id);
+        $data_users = $this->db->get('users')->row_array();
         if ($this->input->is_ajax_request()) {
             $data = [
-                "nama_pegawai" => $data_users,
-                "divisi" => $this->db->get_where("divisi", ["id_divisi" => $data_users["divisi_id"]])->row_array(),
+                "data_users" => $data_users,
                 "data_karyawan" => $this->db->get_where("data_karyawan", ["user_id" => $user_id])->row_array()
             ];
             echo json_encode($data);
