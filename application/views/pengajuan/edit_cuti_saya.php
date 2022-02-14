@@ -100,41 +100,7 @@
                             <textarea name="keterangan" value="<?= $cuti_by_id['keterangan'] ?>" class="form-control"><?= $cuti_by_id['keterangan'] ?></textarea>
                             <small class="text-danger"><?= form_error('keterangan'); ?></small>
                         </div>
-                        <div class="form-group" style="display: none;">
-                            <?php if ($cuti_by_id['status'] == 1) : ?>
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" checked value="1" id="status" name="status" class="custom-control-input">
-                                    <label class="custom-control-label" for="status">Setujui</label>
-                                </div>
-                            <?php else : ?>
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="status" value="1" name="status" class="custom-control-input">
-                                    <label class="custom-control-label" for="status">Setujui</label>
-                                </div>
-                            <?php endif; ?>
-                            <?php if ($cuti_by_id['status'] == 0) : ?>
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" checked id="status" name="status" class="custom-control-input">
-                                    <label class="custom-control-label" value="0" for="status2">Tolak</label>
-                                </div>
-                            <?php else : ?>
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="status" name="status" class="custom-control-input">
-                                    <label class="custom-control-label" value="0" for="status">Tolak</label>
-                                </div>
-                            <?php endif; ?>
-                            <?php if ($cuti_by_id['status'] == 2) : ?>
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" checked id="status" name="status" class="custom-control-input">
-                                    <label class="custom-control-label" value="2" for="status2">Menunggu</label>
-                                </div>
-                            <?php else : ?>
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="status" name="status" class="custom-control-input">
-                                    <label class="custom-control-label" value="2" for="status">Menunggu</label>
-                                </div>
-                            <?php endif; ?>
-                        </div>
+                        <input type="hidden" value="<?= $cuti_by_id['status']; ?>" id="status" name="status" class="custom-control-input">
                         <div class="form-group">
                             <button type="submit" class="btn btn-success btn-flat btn-simpan-cuti">
                                 <i class="fa fa-paper-plane"></i> Simpan
